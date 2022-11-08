@@ -13,14 +13,93 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('monthly_budget')
 
+def get_choice_for_set():
+    """
+    Offer user to chose to update monthly set income and expenses.
+    If user chooses "n" for not to enter, then break function. 
+    If user chooses "y" then is moved to input point.
+    """
+    while True:
+        print("\nWould you like to update set monthly income and expenses?")
+
+        choice = input("Please choose y/n: ")
+
+        if choice == "y":
+            get_set_income_expense_data()
+            break
+        elif choice == "n":
+            break
+        else:
+            print("\nPlease choose between y for yes or n for no")
+
+
+def get_set_income_expense_data():
+    """
+    Get set monthly income and expense data from user.
+    Run a while loop to collect a string of data from the user
+    via the terminal, consisting of exactly 6 numbers, seperated by
+    comma. Loop will keep requesting data until it is valid.
+    """
+    while True:
+        print("\nPlease enter set monthly data")
+        print("Data must be 6 numbers, seperated by commas")
+        print("Example: 10,20,30,40,50,60\n")
+        print("Categories are:")
+        pprint(["1. Total Salary", "2. Other Income", "3. Monthly Morgage", "4. Loans", "5. Utility Bills", "6. Other Set Expenses"])
+     
+        set_data_str = input("\n Enter daily expenses here: ")
+
+        set_in_out_data = set_data_str.split(",")
+        validate_set_data(set_in_out_data)
+
+        if validate_set_data(set_in_out_data):
+            print("Entered information is valid!")
+            break
+
+    return set_in_out_data
+
+
+def validate_set_data(values):
+    """
+    Inside the try, all string values converetd to floats.
+    Raises ValueError if string cannot be converted in float
+    or if there are not exactly 8 values entered
+    """
+    try:
+        [float(value) for value in values]
+        if len(values) != 6:
+            raise ValueError(
+                f"6 values are requires, you entered {len(values)}"
+            )
+    except ValueError as error:
+        print(f"\nInvalid data: {error}, please try again.\n")
+        return False
+
+    return True   
+
+
+set = get_choice_for_set()
+
+
+print(set)
+
+
+
+
+
+
+
+
+
+
 
 def get_daily_expenses_data():
     """
-    Get daily expenses figures input fromthe user
+    Get daily expenses figures input from the user
     Run a while loop to collect a string of data from the user
     via the terminal, string must be a collection of 8 numbers
     seperated by comma. The loop will keep requesting data,
-    until it is valid
+    until it is valid.
     """
     while True:
         print("Please enter today's expenses.\n")
@@ -44,7 +123,7 @@ def get_daily_expenses_data():
 def validate_data(values):
     """
     Inside the try, all string values converetd to floats.
-    Rases ValueError if string cannot be converted in float
+    Raises ValueError if string cannot be converted in float
     or if there are not exactly 8 values entered
     """
     try:
@@ -71,6 +150,6 @@ def update_daily_expenses_worksheet(data):
     print("Daily Expenses worksheet uopdated successfully.\n")
 
 
-data = get_daily_expenses_data()
-update_daily_expenses_worksheet(data)
+#data = get_daily_expenses_data()
+#update_daily_expenses_worksheet(data)
 
