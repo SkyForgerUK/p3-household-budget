@@ -15,6 +15,8 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('monthly_budget')
 
+now = datetime.now()
+the_date = now.strftime("%d/%m/%Y")
 
 def get_choice_for_set():
     """
@@ -190,15 +192,15 @@ def update_total_expenses_sheet(daily_total_data):
     print("Total Daily Expenses worksheet updated successfully.\n")
 
 
-now = datetime.now()
-the_date = now.strftime("%d/%m/%Y")
-set_in_out()
-data = get_daily_expenses_data()
-update_daily_expenses_worksheet(data)
-daily_total_data = sum_daily_expenses()
-update_total_expenses_sheet(daily_total_data)
+def main():
+    set_in_out()
+    data = get_daily_expenses_data()
+    update_daily_expenses_worksheet(data)
+    daily_total_data = sum_daily_expenses()
+    update_total_expenses_sheet(daily_total_data)
 
 
+main()
 
 #print(data)
 #print(type(data))
