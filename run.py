@@ -1,7 +1,7 @@
+from datetime import datetime
 from pprint import pprint
 import gspread
 from google.oauth2.service_account import Credentials
-from datetime import datetime
 
 
 SCOPE = [
@@ -14,6 +14,7 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('monthly_budget')
+
 
 def get_choice_for_set():
     """
@@ -73,7 +74,7 @@ def validate_set_data(values):
                 f"6 values are requires, you entered {len(values)}"
             )
     except ValueError as error:
-        print(f"\nInvalid data: {error}, please try again.\n")
+        print(f"\nInvalid data: {error}, please try again (numbers only).\n")
         return False
 
     return True
@@ -115,12 +116,8 @@ def get_daily_expenses_data():
         print("Example: 10,20,30,40,50,60,70,80\n")
         print("Categories are:")
         pprint(["1. Food", "2. Hygiene and Cleaning", "3. Clothing and Shoes", "4. Pet Supplies", "5. Car and Fuel", "6. Gifts", "7. Large Purchases", "8. Other Expenses"])
-        
 
-        
         data_str = input("\n Enter daily expenses here: ")
-
-        
 
         daily_expenses_data_check = data_str.split(",")
         validate_data(daily_expenses_data_check)
@@ -131,8 +128,7 @@ def get_daily_expenses_data():
         if validate_data(daily_expenses_data_check):
             print("Entered information is valid!")
             break
-        
-                 
+
     return daily_expenses_data
 
 
@@ -149,7 +145,7 @@ def validate_data(values):
                 f"8 values are requires, you entered {len(values)}"
             )
     except ValueError as error:
-        print(f"invalid data: {error}, please try again.\n")
+        print(f"invalid data: {error}, please try again (numbers only).\n")
         return False
 
     return True
@@ -164,8 +160,6 @@ def update_daily_expenses_worksheet(data):
     daily_expenses_worksheet = SHEET.worksheet("daily_expenses")
     daily_expenses_worksheet.append_row(data)
     print("Daily Expenses worksheet updated successfully.\n")
-
-
 
 
 def sum_daily_expenses():
@@ -184,8 +178,6 @@ def sum_daily_expenses():
     return sum_list
 
 
-print(sum_daily_expenses())
-
 def update_total_expenses_sheet(daily_total_data):
     """
     Update daily_expenses worksheet by replacing
@@ -198,11 +190,11 @@ def update_total_expenses_sheet(daily_total_data):
     print("Total Daily Expenses worksheet updated successfully.\n")
 
 
-#now = datetime.now()
-#the_date = now.strftime("%d/%m/%Y")
-#set_in_out()
-#data = get_daily_expenses_data()
-#update_daily_expenses_worksheet(data)
+now = datetime.now()
+the_date = now.strftime("%d/%m/%Y")
+set_in_out()
+data = get_daily_expenses_data()
+update_daily_expenses_worksheet(data)
 daily_total_data = sum_daily_expenses()
 update_total_expenses_sheet(daily_total_data)
 
