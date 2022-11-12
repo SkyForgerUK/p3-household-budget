@@ -1,6 +1,7 @@
 from pprint import pprint
 import gspread
 from google.oauth2.service_account import Credentials
+from datetime import datetime
 
 
 SCOPE = [
@@ -114,16 +115,24 @@ def get_daily_expenses_data():
         print("Example: 10,20,30,40,50,60,70,80\n")
         print("Categories are:")
         pprint(["1. Food", "2. Hygiene and Cleaning", "3. Clothing and Shoes", "4. Pet Supplies", "5. Car and Fuel", "6. Gifts", "7. Large Purchases", "8. Other Expenses"])
+        
 
+        
         data_str = input("\n Enter daily expenses here: ")
 
-        daily_expenses_data = data_str.split(",")
-        validate_data(daily_expenses_data)
+        
 
-        if validate_data(daily_expenses_data):
+        daily_expenses_data_check = data_str.split(",")
+        validate_data(daily_expenses_data_check)
+
+        data_str_total = the_date + ',' + data_str
+        daily_expenses_data = data_str_total.split(",")
+
+        if validate_data(daily_expenses_data_check):
             print("Entered information is valid!")
             break
-
+        
+                 
     return daily_expenses_data
 
 
@@ -156,6 +165,14 @@ def update_daily_expenses_worksheet(data):
     daily_expenses_worksheet.append_row(data)
     print("Daily Expenses worksheet uopdated successfully.\n")
 
+now = datetime.now()
+the_date = now.strftime("%d/%m/%Y")
 set_in_out()
 data = get_daily_expenses_data()
 update_daily_expenses_worksheet(data)
+
+
+print(data)
+print(type(data))
+print(the_date)
+print(type(the_date))
