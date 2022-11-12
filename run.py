@@ -92,6 +92,7 @@ def update_set_in_and_out_worksheet(set_data):
     set_in_and_out_worksheet.delete_rows(2)
     set_in_and_out_worksheet.append_row(set_data)
     print("Daily Expenses worksheet uopdated successfully.\n")
+    total_income()
 
 
 def set_in_out():
@@ -217,8 +218,8 @@ def main():
     update_total_expenses_sheet(daily_total_data)
 
 
-#main()
-total_income()
+main()
+
 
 #print(data)
 #print(type(data))
