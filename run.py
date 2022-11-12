@@ -192,6 +192,23 @@ def update_total_expenses_sheet(daily_total_data):
     print("Total Daily Expenses worksheet updated successfully.\n")
 
 
+def total_income():
+    """
+    Retrieve Total Salary and Other Income values form set_in_and_out sheet.
+    and calculate the sum of them and update the Total Income cell in 
+    summary sheet.
+    """
+    set_sheet = SHEET.worksheet("set_in_and_out")
+    salary = set_sheet.acell('A2').value
+    other_income = set_sheet.acell('B2').value
+    income_sum = float(salary) + float(other_income)
+    form_income_sum = "{:.2f}".format(income_sum)
+    print("Updating Total Income in Summary sheet...\n")
+    summary_sheet = SHEET.worksheet("summary")
+    summary_sheet.update_acell("A2", form_income_sum)
+    print("Total Income updated successfully.\n")
+
+
 def main():
     set_in_out()
     data = get_daily_expenses_data()
@@ -200,7 +217,8 @@ def main():
     update_total_expenses_sheet(daily_total_data)
 
 
-main()
+#main()
+total_income()
 
 #print(data)
 #print(type(data))
