@@ -165,14 +165,22 @@ def update_daily_expenses_worksheet(data):
     daily_expenses_worksheet.append_row(data)
     print("Daily Expenses worksheet uopdated successfully.\n")
 
-now = datetime.now()
-the_date = now.strftime("%d/%m/%Y")
-set_in_out()
-data = get_daily_expenses_data()
-update_daily_expenses_worksheet(data)
+#now = datetime.now()
+#the_date = now.strftime("%d/%m/%Y")
+#set_in_out()
+#data = get_daily_expenses_data()
+#update_daily_expenses_worksheet(data)
+
+daily = SHEET.worksheet("daily_expenses")
+only_numbers = daily.col_values(2)[1:]
+total_sum = sum(float(i) for i in only_numbers)
+formated_sum = "{:.2f}".format(total_sum)
+print(formated_sum)
+#print(type(only_numbers))
 
 
-print(data)
-print(type(data))
-print(the_date)
-print(type(the_date))
+
+#print(data)
+#print(type(data))
+#print(the_date)
+#print(type(the_date))
