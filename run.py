@@ -257,6 +257,19 @@ def all_total_expenses():
     print("Total Expenses updated successfully.\n")
 
 
+def money_left():
+    """
+    Calculate money left by substracting total expense from total income from
+    summary sheet and update the Money Left in summary sheet.
+    """
+    all_income = summary_sheet.acell("A2").value
+    all_expenses = summary_sheet.acell("D2").value
+    leftover = "{:.2f}".format(float(all_income) - float(all_expenses))
+    print("Updating Money Left in Summary sheet...\n")
+    summary_sheet.update_acell("E2", leftover)
+    print("Money Left updated successfully.\n")
+
+
 def main():
     """
     Holds all main functions to be run when program is activated.
@@ -268,6 +281,7 @@ def main():
     update_total_expenses_sheet(daily_total_data)
     ccumulative_daily_expenses()
     all_total_expenses()
+    money_left()
 
 
 main()
