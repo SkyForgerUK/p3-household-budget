@@ -171,12 +171,25 @@ def update_daily_expenses_worksheet(data):
 #data = get_daily_expenses_data()
 #update_daily_expenses_worksheet(data)
 
-daily = SHEET.worksheet("daily_expenses")
-only_numbers = daily.col_values(2)[1:]
-total_sum = sum(float(i) for i in only_numbers)
-formated_sum = "{:.2f}".format(total_sum)
-print(formated_sum)
-#print(type(only_numbers))
+
+def sum_daily_expenses():
+    """
+    Get all coluimn values form daily_expenses sheet and sum.
+    Then return Values  in a list format
+    """
+    daily = SHEET.worksheet("daily_expenses")
+
+    sum_list = []
+    for number in range(2, 10):
+        only_numbers = daily.col_values(number)[1:]
+        total_sum = sum(float(i) for i in only_numbers)
+        formated_sum = "{:.2f}".format(total_sum)       
+        sum_list.append(formated_sum)
+    return sum_list
+
+
+print(sum_daily_expenses())
+
 
 
 
