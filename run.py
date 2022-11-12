@@ -229,18 +229,32 @@ def set_total_expenses():
     print("Total Set Expenses updated successfully.\n")
 
 
-def acumulative_daily_expenses():
+def ccumulative_daily_expenses():
     """
     Retrieve total daily expenses from total_daily_expenses sheet, sum them and
-    post them to Acumulative Daily Expenses in summary sheet.
+    post them to Cumulative Daily Expenses in summary sheet.
     """
     total_d_expenses_sheet = SHEET.worksheet("total_daily_expenses")
     total_expense_list = total_d_expenses_sheet.row_values(2)
     total_exp = sum(float(i) for i in total_expense_list)
     sum_expenses = "{:.2f}".format(total_exp)
-    print("Updating Acumulative Daily Expenses in Summary sheet...\n")
+    print("Updating Cumulative Daily Expenses in Summary sheet...\n")
     summary_sheet.update_acell("C2", sum_expenses)
-    print("Acumulative Daily Expenses updated successfully.\n")
+    print("Cumulative Daily Expenses updated successfully.\n")
+
+
+def all_total_expenses():
+    """
+    Retrieve Total Set Expenses and Cumulative Daily Expenses from summary
+    sheet and sum and update the sum value to Total Expenses in summary
+    sheet.
+    """
+    total_set_expenses = summary_sheet.acell("B2").value
+    cumulative_daily_expenses = summary_sheet.acell("C2").value
+    total_expenses = "{:.2f}".format(float(total_set_expenses) + float(cumulative_daily_expenses))
+    print("Updating Total Expenses in Summary sheet...\n")
+    summary_sheet.update_acell("D2", total_expenses)
+    print("Total Expenses updated successfully.\n")
 
 
 def main():
@@ -252,7 +266,8 @@ def main():
     update_daily_expenses_worksheet(data)
     daily_total_data = sum_daily_expenses()
     update_total_expenses_sheet(daily_total_data)
-    acumulative_daily_expenses()
+    ccumulative_daily_expenses()
+    all_total_expenses()
 
 
 main()
