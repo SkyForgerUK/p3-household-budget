@@ -17,6 +17,9 @@ SHEET = GSPREAD_CLIENT.open('monthly_budget')
 
 now = datetime.now()
 the_date = now.strftime("%d/%m/%Y")
+summary_sheet = SHEET.worksheet("summary")
+set_sheet = SHEET.worksheet("set_in_and_out")
+
 
 def get_choice_for_set():
     """
@@ -93,6 +96,7 @@ def update_set_in_and_out_worksheet(set_data):
     set_in_and_out_worksheet.append_row(set_data)
     print("Daily Expenses worksheet uopdated successfully.\n")
     total_income()
+    set_total_expenses()
 
 
 def set_in_out():
@@ -159,7 +163,7 @@ def update_daily_expenses_worksheet(data):
     Update daily_expenses worksheet and a new row with the
     list data provided
     """
-    print("Updating Daily Expenses worksheet...\n")
+    print("\nUpdating Daily Expenses worksheet...\n")
     daily_expenses_worksheet = SHEET.worksheet("daily_expenses")
     daily_expenses_worksheet.append_row(data)
     print("Daily Expenses worksheet updated successfully.\n")
@@ -195,30 +199,64 @@ def update_total_expenses_sheet(daily_total_data):
 
 def total_income():
     """
-    Retrieve Total Salary and Other Income values form set_in_and_out sheet.
-    and calculate the sum of them and update the Total Income cell in 
+    Retrieve Total Salary and Other Income values from set_in_and_out sheet
+    and calculate the sum of them and update the Total Income cell in
     summary sheet.
     """
-    set_sheet = SHEET.worksheet("set_in_and_out")
     salary = set_sheet.acell('A2').value
     other_income = set_sheet.acell('B2').value
     income_sum = float(salary) + float(other_income)
     form_income_sum = "{:.2f}".format(income_sum)
     print("Updating Total Income in Summary sheet...\n")
-    summary_sheet = SHEET.worksheet("summary")
     summary_sheet.update_acell("A2", form_income_sum)
     print("Total Income updated successfully.\n")
 
 
+def set_total_expenses():
+    """
+    Retrieve all Set Expenses values form set_in_and_out sheet
+    and calculate the sum of them and update the Total Set Expenses
+    cell in summary sheet.
+    """
+    set_expenses_mortgage = set_sheet.acell('C2').value
+    set_expenses_loans = set_sheet.acell('D2').value
+    set_expenses_utility = set_sheet.acell('E2').value
+    set_expenses_other = set_sheet.acell('F2').value
+    set_expenses_sum = float(set_expenses_mortgage) + float(set_expenses_loans) + float(set_expenses_utility) + float(set_expenses_other)
+    form_set_expense_sum = "{:.2f}".format(set_expenses_sum)
+    print("Updating Total Set Expenses in Summary sheet...\n")
+    summary_sheet.update_acell("B2", form_set_expense_sum)
+    print("Total Set Expenses updated successfully.\n")
+
+
+def acumulative_daily_expenses():
+    """
+    Retrieve total daily expenses from total_daily_expenses sheet, sum them and
+    post them to Acumulative Daily Expenses in summary sheet.
+    """
+    total_d_expenses_sheet = SHEET.worksheet("total_daily_expenses")
+    total_expense_list = total_d_expenses_sheet.row_values(2)
+    total_exp = sum(float(i) for i in total_expense_list)
+    sum_expenses = "{:.2f}".format(total_exp)
+    print("Updating Acumulative Daily Expenses in Summary sheet...\n")
+    summary_sheet.update_acell("C2", sum_expenses)
+    print("Acumulative Daily Expenses updated successfully.\n")
+
+
 def main():
+    """
+    Holds all main functions to be run when program is activated.
+    """
     set_in_out()
     data = get_daily_expenses_data()
     update_daily_expenses_worksheet(data)
     daily_total_data = sum_daily_expenses()
     update_total_expenses_sheet(daily_total_data)
+    acumulative_daily_expenses()
 
 
 main()
+
 
 
 #print(data)
