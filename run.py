@@ -270,6 +270,23 @@ def money_left():
     print("Money Left updated successfully.\n")
 
 
+def comments():
+    """
+    Ad feedback infomation for the user to see once all the data has been
+    calculated and updated.
+    """
+    total_in = "{:.2f}".format(float(summary_sheet.acell("A2").value))
+    set_out = "{:.2f}".format(float(summary_sheet.acell("B2").value))
+    daily_out = "{:.2f}".format(float(summary_sheet.acell("C2").value))
+    total_out = "{:.2f}".format(float(summary_sheet.acell("D2").value))
+    funds_left = "{:.2f}".format(float(summary_sheet.acell("E2").value))
+    print(f"\nYour Total Monthly Income       - £ {total_in}\n")
+    print(f"Your Set Monthly Expenses       - £ {set_out}\n")
+    print(f"Your Daily Cumulative Expenses  - £ {daily_out}\n")
+    print(f"Your Total Expenses             - £ {total_out}\n\n")
+    print(f"You have £ {funds_left} left to spend.\n\n")
+
+
 def main():
     """
     Holds all main functions to be run when program is activated.
@@ -282,6 +299,7 @@ def main():
     ccumulative_daily_expenses()
     all_total_expenses()
     money_left()
+    comments()
 
 
 main()
