@@ -15,10 +15,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('monthly_budget')
 
-now = datetime.now()
-the_date = now.strftime("%d/%m/%Y")
-summary_sheet = SHEET.worksheet("summary")
-set_sheet = SHEET.worksheet("set_in_and_out")
+
 
 
 def get_choice_for_set():
@@ -132,6 +129,9 @@ def get_daily_expenses_data():
         daily_expenses_data_check = data_str.split(",")
         validate_data(daily_expenses_data_check)
 
+        date = datetime.now()
+        the_date = date.strftime("%d/%m/%Y")
+
         data_str_total = the_date + ',' + data_str
         daily_expenses_data = data_str_total.split(",")
 
@@ -206,6 +206,8 @@ def total_income():
     and calculate the sum of them and update the Total Income cell in
     summary sheet.
     """
+    summary_sheet = SHEET.worksheet("summary")
+    set_sheet = SHEET.worksheet("set_in_and_out")
     salary = set_sheet.acell('A2').value
     other_income = set_sheet.acell('B2').value
     income_sum = float(salary) + float(other_income)
@@ -221,6 +223,8 @@ def set_total_expenses():
     and calculate the sum of them and update the Total Set Expenses
     cell in summary sheet.
     """
+    summary_sheet = SHEET.worksheet("summary")
+    set_sheet = SHEET.worksheet("set_in_and_out")
     set_expenses_mortgage = set_sheet.acell('C2').value
     set_expenses_loans = set_sheet.acell('D2').value
     set_expenses_utility = set_sheet.acell('E2').value
@@ -240,6 +244,7 @@ def cumulative_daily_expenses():
     Retrieve total daily expenses from total_daily_expenses sheet, sum them and
     post them to Cumulative Daily Expenses in summary sheet.
     """
+    summary_sheet = SHEET.worksheet("summary")
     total_d_expenses_sheet = SHEET.worksheet("total_daily_expenses")
     total_expense_list = total_d_expenses_sheet.row_values(2)
     total_exp = sum(float(i) for i in total_expense_list)
@@ -255,6 +260,7 @@ def all_total_expenses():
     sheet and sum and update the sum value to Total Expenses in summary
     sheet.
     """
+    summary_sheet = SHEET.worksheet("summary")
     total_set_expenses = summary_sheet.acell("B2").value
     growing_exp = summary_sheet.acell("C2").value
     combined_expenses = float(total_set_expenses) + float(growing_exp)
@@ -269,6 +275,7 @@ def money_left():
     Calculate money left by substracting total expense from total income from
     summary sheet and update the Money Left in summary sheet.
     """
+    summary_sheet = SHEET.worksheet("summary")
     all_income = summary_sheet.acell("A2").value
     all_expenses = summary_sheet.acell("D2").value
     after_spent = float(all_income) - float(all_expenses)
@@ -283,6 +290,7 @@ def comments():
     Ad feedback infomation for the user to see once all the data has been
     calculated and updated.
     """
+    summary_sheet = SHEET.worksheet("summary")
     total_in = f'{float(summary_sheet.acell("A2").value):.2f}'
     set_out = f'{float(summary_sheet.acell("B2").value):.2f}'
     daily_out = f'{float(summary_sheet.acell("C2").value):.2f}'
