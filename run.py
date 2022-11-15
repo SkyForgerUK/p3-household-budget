@@ -74,7 +74,7 @@ def validate_set_data(values):
                 f"6 values are requires, you entered {len(values)}"
             )
     except ValueError as error:
-        print(f"\nInvalid data: {error}, please try again (numbers only).\n")
+        print(f"\nInvalid data: {error},\nPlease try again (numbers only).\n")
         return False
 
     return True
@@ -153,7 +153,7 @@ def validate_data(values):
                 f"8 values are requires, you entered {len(values)}"
             )
     except ValueError as error:
-        print(f"invalid data: {error}, please try again (numbers only).\n")
+        print(f"Invalid data: {error}.\nPlease try again (numbers only).\n")
         return False
 
     return True
@@ -317,4 +317,5 @@ def main():
 
 
 if __name__ == '__main__':
+    print("Welcome to your personal monthly household budget")
     main()
