@@ -1,3 +1,6 @@
+"""
+Module contains functions fo the Mnthly budget app
+"""
 from datetime import datetime
 from pprint import pprint
 import gspread

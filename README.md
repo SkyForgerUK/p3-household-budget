@@ -1,13 +1,14 @@
 
 # Your Household Monthly Budget
-A simple program allowing single user to populate a google spreadsheet with income and spending to keep track of Monthly Household Budget.
+A simple app allowing single user to populate a google spreadsheet with income and spending to keep track of Monthly Household Budget.
 
-The household Monthly Budget program will provide user with:
+The household Monthly Budget app will provide user with:
 
 1. Easy way to quickly update income and spendings
 2. Calculate the spendings and funds left available after each update
 3. Populate a google spreadsheet with the information and calculations for further use
 4. Provide user with a short summary after data entry is succesfully done
+5. Allow user to input negative quantities in Daily spendings for any refunds received from returned purchases
 
 ![mockup](https://github.comADD mockup pic)
 
@@ -35,34 +36,22 @@ Visit the Deployed website [here](https://skyforgeruk.github.io/Project_2_RPSSL/
     - See feedback if entered data is incorrect and hints on what was incorrect.
     - To see update and calcullation being in progress.
     - To receive a summary of the current income and spending state.
-    - To have usable google spreadsheet after using the program.
+    - To have usable google spreadsheet after using the app.
 
+
+## Flow chart
+
+!!!! ADD INFO of Data chart of the flow of the app !!!
 
 ## Existing Features
-There is one Home page including:
 
-- Landing page
-- Pop-up window explaining the rules of the game
+- User I queried if they want to update the set monthly income and spendings:
+    - Needs to be done only once a month
+    - If information needs to be amended then user has an option to do so
+    - Option to not to have to update set info every thime app is launched saves time
 
-### Navigation Bar and Footer
-Both Nav bar and footer are responsive to the size of the screen being used to read the website.
-- __Navigation Bar:__
-    - Nav bar holds abbreviation of the game's full name and a stylised button that brings up rules contained in a pop-up window.
-- __Footer:__
-    - Footer contains full name of the game and is used to give the site a better overall look.
-### Landing Page
-- __Game Area:__
-    - Holds the:
-        - Score area - where the current score is kept
-        - Chosen card area - where the user's and computers chosen cards are shown
-        - Interactive text area - instructs user and provides feedback on choice made - win, lose or draw
-        - Card area - holding 3 cards for the user to chose and play from 
+ ![Input choice screenshot](https://github.com/SkyForgerUK/Project_2_RPSSL/blob/main/docs/screenshot-main.jpg)
 
-<details>
-  <summary>Landing Page screenshot</summary>
-
- ![Landing Page screenshot](https://github.com/SkyForgerUK/Project_2_RPSSL/blob/main/docs/screenshot-main.jpg)
-</details>
 <br>
 <details>
   <summary>Pop-up page screenshot</summary>
@@ -73,13 +62,12 @@ Both Nav bar and footer are responsive to the size of the screen being used to r
 
 ## Features left to implement
 - __Multiuser access__
-    - Current goal was to have the program serve one user per household, but using UUID a multi user exoperience could be provided.
+    - Current goal was to have the app serve one user per household, but using UUID a multi user exoperience could be provided.
+- __Create a a solution for refunds__
+    - Create an additional input for user to submit daily refunds, so the current method of negative quantity input can be disabled.
 
 
 
-## Data Model
-
-!!!! ADD INFO !!!
 
 ### Languages
 
@@ -103,7 +91,7 @@ Testing was carried out by project developer using pylint run.py in Gitpod envir
     - 9 lines of c0209: formatting a regular string which could be a f-string (consider-using-f-string) error
     - 1 line of C0114: Missing module docstring (missing-module-docstring)
 
-- Aftter fixes one line still remains:
+- After fixes one line still remains:
     - C0114: Missing module docstring (missing-module-docstring) - in order to fix pylint C0114 function needs disabling
 
 - Code rated at 9.94/10 after fixes.
@@ -122,18 +110,7 @@ Testing was carried out by project developer using pylint run.py in Gitpod envir
  ### Not fixed bugs
  - __No bugs found__
 
-  <br>  
 
-### Supported Screens, Browsers and Performance
-### Browsers
-- Google Chrome
-- Microsoft Edge
-- Mozilla Firefox
-### Screens
-- Huawei P20 Pro
-- Huawei P30 Mate
-- iPhone 13 Pro
-- iPhone 11
 
 
 <br >
@@ -167,7 +144,7 @@ Testing was carried out by project developer using pylint run.py in Gitpod envir
     - Go to address https://github.com/SkyForgerUK/p3-household-budget
     - Click on "Gitpod" button to launch the application
     - In TERMINAL section type in command "python3 run.py"
-    - Program will run in the TERMINAL
+    - App will run in the TERMINAL
 
 <details>
 
@@ -180,7 +157,7 @@ Testing was carried out by project developer using pylint run.py in Gitpod envir
 
 ## Credits
 ### Content
-- All content created by the project developer, except of:
+- All content created by the project developer, except of:g
   - Error check base code which was taken from Love Sandwitches project and mmodified to fit the developers needs
 ### Media
 - stackowerflow was used to problemsolve various code issues
