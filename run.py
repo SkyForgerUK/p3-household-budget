@@ -96,8 +96,8 @@ def update_set_in_and_out_worksheet(set_data):
 
 def set_in_out():
     """
-    Combine users choice to update the set income or not with
-    enter the set data if users choice was yes.
+    Combine users choice to update the "set income" or not with
+    "enter the set data" if users choice was yes.
     """
     if get_choice_for_set():
         set_data = get_set_income_expense_data()
@@ -262,7 +262,7 @@ def all_total_expenses():
     total_set_expenses = summary_sheet.acell("B2").value
     growing_exp = summary_sheet.acell("C2").value
     combined_expenses = float(total_set_expenses) + float(growing_exp)
-    total_expenses = f'{combined_expenses:.2f}'
+    total_expenses = f'{float(combined_expenses):.2f}'
     print("Updating Total Expenses in Summary sheet...\n")
     summary_sheet.update_acell("D2", total_expenses)
     print("Total Expenses updated successfully.\n")
