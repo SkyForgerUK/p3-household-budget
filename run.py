@@ -16,8 +16,6 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('monthly_budget')
 
 
-
-
 def get_choice_for_set():
     """
     Offer user to chose to update monthly set income and expenses.
