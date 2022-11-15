@@ -24,20 +24,19 @@ set_sheet = SHEET.worksheet("set_in_and_out")
 def get_choice_for_set():
     """
     Offer user to chose to update monthly set income and expenses.
-    If user chooses "n" for not to enter, then break function. 
+    If user chooses "n" for not to enter, then break function.
     If user chooses "y" then is moved to input point.
     """
     while True:
         print("\nWould you like to update set monthly income and expenses?")
 
-        choice = input("Please choose y/n: ")
+        choice = input("Please choose y/n:\n")
 
         if choice == "y":
             return True
-        elif choice == "n":
+        if choice == "n":
             break
-        else:
-            print("\nPlease choose between y for yes or n for no")
+        print("\nPlease choose between y for yes or n for no")
 
 
 def get_set_income_expense_data():
@@ -52,9 +51,10 @@ def get_set_income_expense_data():
         print("Data must be 6 numbers, seperated by commas")
         print("Example: 10,20,30,40,50,60\n")
         print("Categories are:")
-        pprint(["1. Total Salary", "2. Other Income", "3. Monthly Morgage", "4. Loans", "5. Utility Bills", "6. Other Set Expenses"])
+        pprint(["1. Total Salary", "2. Other Income", "3. Monthly Morgage",
+                "4. Loans", "5. Utility Bills", "6. Other Set Expenses"])
 
-        set_data_str = input("\n Enter daily expenses here: ")
+        set_data_str = input("\n Enter daily expenses here:\n")
 
         set_in_out_data = set_data_str.split(",")
         validate_set_data(set_in_out_data)
@@ -73,8 +73,8 @@ def validate_set_data(values):
     or if there are not exactly 8 values entered
     """
     try:
-        [float(value) for value in values]
-        if len(values) != 6:
+        number = [float(value) for value in values]
+        if len(number) != 6:
             raise ValueError(
                 f"6 values are requires, you entered {len(values)}"
             )
@@ -122,9 +122,12 @@ def get_daily_expenses_data():
         print("Data must be 8 numbers, seperated by commas")
         print("Example: 10,20,30,40,50,60,70,80\n")
         print("Categories are:")
-        pprint(["1. Food", "2. Hygiene and Cleaning", "3. Clothing and Shoes", "4. Pet Supplies", "5. Car and Fuel", "6. Gifts", "7. Large Purchases", "8. Other Expenses"])
+        pprint(["1. Food", "2. Hygiene and Cleaning",
+                "3. Clothing and Shoes", "4. Pet Supplies",
+                "5. Car and Fuel", "6. Gifts", "7. Large Purchases",
+                "8. Other Expenses"])
 
-        data_str = input("\n Enter daily expenses here: ")
+        data_str = input("\n Enter daily expenses here:\n")
 
         daily_expenses_data_check = data_str.split(",")
         validate_data(daily_expenses_data_check)
@@ -146,8 +149,8 @@ def validate_data(values):
     or if there are not exactly 8 values entered
     """
     try:
-        [float(value) for value in values]
-        if len(values) != 8:
+        number = [float(value) for value in values]
+        if len(number) != 8:
             raise ValueError(
                 f"8 values are requires, you entered {len(values)}"
             )
@@ -180,7 +183,7 @@ def sum_daily_expenses():
     for number in range(2, 10):
         only_numbers = daily.col_values(number)[1:]
         total_sum = sum(float(i) for i in only_numbers)
-        formated_sum = "{:.2f}".format(total_sum)       
+        formated_sum = f'{total_sum:.2f}'
         sum_list.append(formated_sum)
     return sum_list
 
@@ -206,7 +209,7 @@ def total_income():
     salary = set_sheet.acell('A2').value
     other_income = set_sheet.acell('B2').value
     income_sum = float(salary) + float(other_income)
-    form_income_sum = "{:.2f}".format(income_sum)
+    form_income_sum = f'{income_sum:.2f}'
     print("Updating Total Income in Summary sheet...\n")
     summary_sheet.update_acell("A2", form_income_sum)
     print("Total Income updated successfully.\n")
@@ -222,14 +225,17 @@ def set_total_expenses():
     set_expenses_loans = set_sheet.acell('D2').value
     set_expenses_utility = set_sheet.acell('E2').value
     set_expenses_other = set_sheet.acell('F2').value
-    set_expenses_sum = float(set_expenses_mortgage) + float(set_expenses_loans) + float(set_expenses_utility) + float(set_expenses_other)
-    form_set_expense_sum = "{:.2f}".format(set_expenses_sum)
+    set_expenses_sum = float(set_expenses_mortgage)\
+                       + float(set_expenses_loans)\
+                       + float(set_expenses_utility)\
+                       + float(set_expenses_other)
+    form_set_expense_sum = f'{set_expenses_sum:.2f}'
     print("Updating Total Set Expenses in Summary sheet...\n")
     summary_sheet.update_acell("B2", form_set_expense_sum)
     print("Total Set Expenses updated successfully.\n")
 
 
-def ccumulative_daily_expenses():
+def cumulative_daily_expenses():
     """
     Retrieve total daily expenses from total_daily_expenses sheet, sum them and
     post them to Cumulative Daily Expenses in summary sheet.
@@ -237,7 +243,7 @@ def ccumulative_daily_expenses():
     total_d_expenses_sheet = SHEET.worksheet("total_daily_expenses")
     total_expense_list = total_d_expenses_sheet.row_values(2)
     total_exp = sum(float(i) for i in total_expense_list)
-    sum_expenses = "{:.2f}".format(total_exp)
+    sum_expenses = f'{total_exp:.2f}'
     print("Updating Cumulative Daily Expenses in Summary sheet...\n")
     summary_sheet.update_acell("C2", sum_expenses)
     print("Cumulative Daily Expenses updated successfully.\n")
@@ -250,8 +256,9 @@ def all_total_expenses():
     sheet.
     """
     total_set_expenses = summary_sheet.acell("B2").value
-    cumulative_daily_expenses = summary_sheet.acell("C2").value
-    total_expenses = "{:.2f}".format(float(total_set_expenses) + float(cumulative_daily_expenses))
+    growing_exp = summary_sheet.acell("C2").value
+    combined_expenses = float(total_set_expenses) + float(growing_exp)
+    total_expenses = f'{combined_expenses:.2f}'
     print("Updating Total Expenses in Summary sheet...\n")
     summary_sheet.update_acell("D2", total_expenses)
     print("Total Expenses updated successfully.\n")
@@ -264,7 +271,8 @@ def money_left():
     """
     all_income = summary_sheet.acell("A2").value
     all_expenses = summary_sheet.acell("D2").value
-    leftover = "{:.2f}".format(float(all_income) - float(all_expenses))
+    after_spent = float(all_income) - float(all_expenses)
+    leftover = f'{after_spent:.2f}'
     print("Updating Money Left in Summary sheet...\n")
     summary_sheet.update_acell("E2", leftover)
     print("Money Left updated successfully.\n")
@@ -275,11 +283,11 @@ def comments():
     Ad feedback infomation for the user to see once all the data has been
     calculated and updated.
     """
-    total_in = "{:.2f}".format(float(summary_sheet.acell("A2").value))
-    set_out = "{:.2f}".format(float(summary_sheet.acell("B2").value))
-    daily_out = "{:.2f}".format(float(summary_sheet.acell("C2").value))
-    total_out = "{:.2f}".format(float(summary_sheet.acell("D2").value))
-    funds_left = "{:.2f}".format(float(summary_sheet.acell("E2").value))
+    total_in = f'{float(summary_sheet.acell("A2").value):.2f}'
+    set_out = f'{float(summary_sheet.acell("B2").value):.2f}'
+    daily_out = f'{float(summary_sheet.acell("C2").value):.2f}'
+    total_out = f'{float(summary_sheet.acell("D2").value):.2f}'
+    funds_left = f'{float(summary_sheet.acell("E2").value):.2f}'
     print(f"\nYour Total Monthly Income       - £ {total_in}\n")
     print(f"Your Set Monthly Expenses       - £ {set_out}\n")
     print(f"Your Daily Cumulative Expenses  - £ {daily_out}\n")
@@ -296,17 +304,10 @@ def main():
     update_daily_expenses_worksheet(data)
     daily_total_data = sum_daily_expenses()
     update_total_expenses_sheet(daily_total_data)
-    ccumulative_daily_expenses()
+    cumulative_daily_expenses()
     all_total_expenses()
     money_left()
     comments()
 
 
 main()
-
-
-
-#print(data)
-#print(type(data))
-#print(the_date)
-#print(type(the_date))
