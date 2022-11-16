@@ -24,7 +24,6 @@ Visit the Google Spreadsheet [here](https://docs.google.com/spreadsheets/d/1tGRl
 - [Language](#language)
 - [Software and Framework Libraries](#software-and-framework-libraries)
 - [Testing](#testing)
-  - [Code Validation - pylint run.py](#code-validation---pylint-run.py)
   - [General Testing](#general-testing)
   - [Fixed Bugs](#fixed-bugs)
   - [Not Fixed Bugs](#not-fixed-bugs)
