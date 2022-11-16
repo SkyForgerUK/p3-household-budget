@@ -112,7 +112,7 @@ Testing was carried out by project developer using pylint run.py in Gitpod envir
     - 1 line of C0114: Missing module docstring (missing-module-docstring)
 
 - On second run 1 error was shown:
-    - C0114: Missing module docstring (missing-module-docstring) - in order to fix pylint C0114 function needs disabling
+    - C0114: Missing module docstring (missing-module-docstring)
 
 - On third run - all errors have been cleared
     - Code rated at 10/10 after fixes.
