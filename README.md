@@ -2,17 +2,20 @@
 # Your Household Monthly Budget
 A simple app allowing single user to populate a google spreadsheet with income and spending to keep track of Monthly Household Budget.
 
-The household Monthly Budget app will provide user with:
+The Monthly Household Budget app will provide user with:
 
 1. Easy way to quickly update income and spendings
 2. Calculate the spendings and funds left available after each update
 3. Populate a google spreadsheet with the information and calculations for further use
 4. Provide user with a short summary after data entry is succesfully done
-5. Allow user to input negative quantities in Daily spendings for any refunds received from returned purchases
+5. Allow user to input negative quantities in spendings for any refunds received from returned purchases
 
 ![mockup](https://github.comADD mockup pic)
 
-Visit the Deployed website [here](https://skyforgeruk.github.io/Project_2_RPSSL/)
+Visit the Deployed app [here](https://p3-monthly-budget.herokuapp.com/)
+
+Visit the Google Spreadsheet [here](https://docs.google.com/spreadsheets/d/1tGRlS6nOt_KR-9JTXAoTrjGjLxxa7G9GL4ZY24hSXQU/edit#gid=0)
+
 ## Table of Content
 - [User Stories](#user-stories)
 - [Existing Features](#existing-features)
@@ -39,25 +42,44 @@ Visit the Deployed website [here](https://skyforgeruk.github.io/Project_2_RPSSL/
     - To have usable google spreadsheet after using the app.
 
 
-## Flow chart
+## Flowchart
 
-!!!! ADD INFO of Data chart of the flow of the app !!!
+![Flowchart screenshot](https://git)
 
 ## Existing Features
 
-- User I queried if they want to update the set monthly income and spendings:
+- User is queried if they want to update the set monthly income and spendings:
     - Needs to be done only once a month
     - If information needs to be amended then user has an option to do so
     - Option to not to have to update set info every thime app is launched saves time
 
- ![Input choice screenshot](https://github.com/SkyForgerUK/Project_2_RPSSL/blob/main/docs/screenshot-main.jpg)
+![Update Set Values screenshot](https://github.com/SkyForgerUK/Project_2_RPSSL/blob/main/docs/screenshot-main.jpg)
 
 <br>
-<details>
-  <summary>Pop-up page screenshot</summary>
 
- ![Pop-up page screenshot](https://github.com/SkyForgerUK/Project_2_RPSSL/blob/main/docs/pop-up-screen.jpg)
-</details>
+- User is informed what the categories to update are and the format the data needs to be on both - Set Income and spendings and Daily spendings.
+
+![Information screenshot](https://github.com/SkyForgerUK/Project_2_RPSSL/blob/main/docs/pop-up-screen.jpg)
+
+<br>
+
+- User is informed if invalid data is entered and promted to enter the data again.
+
+![Invalid number count screenshot](https://github.com/SkyForgerUK/Project_2_RPSSL/blob/main/docs/pop-up-screen.jpg)
+![Invalid data format screenshot](https://github.com/SkyForgerUK/Project_2_RPSSL/blob/main/docs/pop-up-screen.jpg)
+
+<br>
+
+- User is visualy informed that the app is doing calculations and updates.
+
+![Updating screenshot](https://github.com/SkyForgerUK/Project_2_RPSSL/blob/main/docs/pop-up-screen.jpg)
+
+<br>
+
+- User is provided with a summary of Income, Expenses and Money left over to spend.
+
+![Summary screenshot](https://github.com/SkyForgerUK/Project_2_RPSSL/blob/main/docs/pop-up-screen.jpg)
+
 <br>
 
 ## Features left to implement
@@ -65,9 +87,6 @@ Visit the Deployed website [here](https://skyforgeruk.github.io/Project_2_RPSSL/
     - Current goal was to have the app serve one user per household, but using UUID a multi user exoperience could be provided.
 - __Create a a solution for refunds__
     - Create an additional input for user to submit daily refunds, so the current method of negative quantity input can be disabled.
-
-
-
 
 ### Languages
 
@@ -91,27 +110,30 @@ Testing was carried out by project developer using pylint run.py in Gitpod envir
     - 9 lines of c0209: formatting a regular string which could be a f-string (consider-using-f-string) error
     - 1 line of C0114: Missing module docstring (missing-module-docstring)
 
-- After fixes one line still remains:
+- On second run 1 error was shown:
     - C0114: Missing module docstring (missing-module-docstring) - in order to fix pylint C0114 function needs disabling
 
-- Code rated at 9.94/10 after fixes.
+- On third run - all errors have been cleared
+    - Code rated at 10/10 after fixes.
 
-### Test cases 
-<br>
 
-- __User Cases__
+### Testing  
+    |Action | Expected behaviour | Result|
+    |-------|--------------------|-------|
+    |Run Program | Greeting message and a propt to choose to update Set Income and Expenses apears | Pass |
+    |When prompted to enter y or n, type any other character | Error message apears explaining issue and user is prompted to enter the y or n again | Pass |
+    |Choose not to update the Set values | updating is bypassed and usser is taken to update Daily expenses | Pass |
+    |Choose to update the Set values| User is provided with a list of categoriess and an example of acceptable data format | Pass |
+    |Input incorrect data in Daily expenses update | Error message apears explaining issue and user is prompted to enter the data again | Pass |
+    |Correct data is logged  | Processing and updating lines for varous categories are shown and at the end a summary of expenses, income and money left is shown in the portal | Pass |
+<br>  
 
-!!!!! ADD INFO HERE !!!!
-  
 ### Fixed bugs
 - __Values would not show 2 decimal places__
-    - fixed using f string formating method
+    - Fixed using f string formating method
 
  ### Not fixed bugs
  - __No bugs found__
-
-
-
 
 <br >
 
