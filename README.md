@@ -10,7 +10,7 @@ The Monthly Household Budget app will provide user with:
 4. Provide user with a short summary after data entry is succesfully done
 5. Allow user to input negative quantities in spendings for any refunds received from returned purchases
 
-![mockup](https://github.comADD mockup pic)
+![mockup](https://github.com/SkyForgerUK/p3-household-budget/blob/main/docs/mockup.jpg)
 
 Visit the Deployed app [here](https://p3-monthly-budget.herokuapp.com/)
 
@@ -44,7 +44,7 @@ Visit the Google Spreadsheet [here](https://docs.google.com/spreadsheets/d/1tGRl
 
 ## Flowchart
 
-![Flowchart screenshot](https://git)
+![Flowchart screenshot](https://github.com/SkyForgerUK/p3-household-budget/blob/main/docs/spreadsheet.jpg)
 
 ## Existing Features
 
@@ -53,32 +53,32 @@ Visit the Google Spreadsheet [here](https://docs.google.com/spreadsheets/d/1tGRl
     - If information needs to be amended then user has an option to do so
     - Option to not to have to update set info every thime app is launched saves time
 
-![Update Set Values screenshot](https://github.com/SkyForgerUK/Project_2_RPSSL/blob/main/docs/screenshot-main.jpg)
+![Update Set Values screenshot](https://github.com/SkyForgerUK/p3-household-budget/blob/main/docs/to-update-set.jpg)
 
 <br>
 
 - User is informed what the categories to update are and the format the data needs to be on both - Set Income and spendings and Daily spendings.
 
-![Information screenshot](https://github.com/SkyForgerUK/Project_2_RPSSL/blob/main/docs/pop-up-screen.jpg)
+![Information screenshot](https://github.com/SkyForgerUK/p3-household-budget/blob/main/docs/information.jpg)
 
 <br>
 
 - User is informed if invalid data is entered and promted to enter the data again.
 
-![Invalid number count screenshot](https://github.com/SkyForgerUK/Project_2_RPSSL/blob/main/docs/pop-up-screen.jpg)
-![Invalid data format screenshot](https://github.com/SkyForgerUK/Project_2_RPSSL/blob/main/docs/pop-up-screen.jpg)
+![Invalid number count screenshot](https://github.com/SkyForgerUK/p3-household-budget/blob/main/docs/invalid-numbers.jpg)
+![Invalid data format screenshot](https://github.com/SkyForgerUK/p3-household-budget/blob/main/docs/invalid-data.jpg)
 
 <br>
 
 - User is visualy informed that the app is doing calculations and updates.
 
-![Updating screenshot](https://github.com/SkyForgerUK/Project_2_RPSSL/blob/main/docs/pop-up-screen.jpg)
+![Updating screenshot](https://github.com/SkyForgerUK/p3-household-budget/blob/main/docs/updating.jpg)
 
 <br>
 
 - User is provided with a summary of Income, Expenses and Money left over to spend.
 
-![Summary screenshot](https://github.com/SkyForgerUK/Project_2_RPSSL/blob/main/docs/pop-up-screen.jpg)
+![Summary screenshot](https://github.com/SkyForgerUK/p3-household-budget/blob/main/docs/summry.jpg)
 
 <br>
 
@@ -115,17 +115,22 @@ Testing was carried out by project developer using pylint run.py in Gitpod envir
 
 - On third run - all errors have been cleared
     - Code rated at 10/10 after fixes.
+<br>
+
+![Test screenshot](https://github.com/SkyForgerUK/p3-household-budget/blob/main/docs/pylint-no-errors.jpg)
 
 
 ### Testing  
-    |Action | Expected behaviour | Result|
-    |-------|--------------------|-------|
-    |Run Program | Greeting message and a propt to choose to update Set Income and Expenses apears | Pass |
-    |When prompted to enter y or n, type any other character | Error message apears explaining issue and user is prompted to enter the y or n again | Pass |
-    |Choose not to update the Set values | updating is bypassed and usser is taken to update Daily expenses | Pass |
-    |Choose to update the Set values| User is provided with a list of categoriess and an example of acceptable data format | Pass |
-    |Input incorrect data in Daily expenses update | Error message apears explaining issue and user is prompted to enter the data again | Pass |
-    |Correct data is logged  | Processing and updating lines for varous categories are shown and at the end a summary of expenses, income and money left is shown in the portal | Pass |
+
+  |Action | Expected behaviour | Result|
+  |-------|--------------------|-------|
+  |Run Program | Greeting message and a propt to choose to update Set Income and Expenses apears | Pass |
+  |When prompted to enter y or n, type any other character | Error message apears explaining issue and user is prompted to enter the y or n again | Pass |
+  |Choose not to update the Set values | updating is bypassed and usser is taken to update Daily expenses | Pass |
+  |Choose to update the Set values| User is provided with a list of categoriess and an example of acceptable data format | Pass |
+  |Input incorrect data in Daily expenses update | Error message apears explaining issue and user is prompted to enter the data again | Pass |
+  |Correct data is logged  | Processing and updating lines for varous categories are shown and at the end a summary of expenses, income and money left is shown in the portal | Pass |
+
 <br>  
 
 ### Fixed bugs
@@ -156,7 +161,7 @@ Testing was carried out by project developer using pylint run.py in Gitpod envir
 
   <summary>Link Page screenshot</summary>
 
-   ![Published via Heroku](https://github.com/SkyForgerUK/ADD DEPLOYED PIC)
+   ![Published via Heroku](https://github.com/SkyForgerUK/p3-household-budget/blob/main/docs/deploy-heroku.jpg)
   
 </details> 
 <br>   
@@ -172,7 +177,7 @@ Testing was carried out by project developer using pylint run.py in Gitpod envir
 
   <summary>Link Page screenshot</summary>
 
-   ![Published via GitPod](https://github.com/SkyForgerUKADD GITPOD DEPLOY PIC)
+   ![Published via GitPod](https://github.com/SkyForgerUK/p3-household-budget/blob/main/docs/deploy-gitpod.jpg)
   
 </details> 
 <br>   
